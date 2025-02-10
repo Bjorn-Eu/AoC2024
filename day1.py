@@ -36,5 +36,4 @@ for d in f:
     b.append((int)(data[1]))
 
 print('Difference score:',sorted_difference(a,b))
-
 print('Similarity score:',simalarity(a,b))
