@@ -79,7 +79,7 @@ def find_loops(candidates,x,y,grid):
 
 
 
-f = open('day6.txt','r')
+f = open('data/day6.txt','r')
 data = f.read().split('\n')
 array = []
 
@@ -94,7 +94,6 @@ directions = ['up','right','down','left']
 direction = 'up'
 EMPTY = '.'
 
-#print(array)
 
 #find start index and remove marker
 for i in range(rows):
@@ -109,10 +108,6 @@ visited = set(start_index)
 x = start_index[1]
 y = start_index[0]
 
-
-
-x = start_index[1]
-y = start_index[0]
 visited = find_path(x,y,array)
 print('Number of visited positions:',len(visited))
 
@@ -120,7 +115,6 @@ print('Number of visited positions:',len(visited))
 
 visited.remove((x,y))
 obstacles = find_loops(visited,x,y,array)
-#print(obstacles)
 print('Number of posible obstacle positions:',len(obstacles))
 
 

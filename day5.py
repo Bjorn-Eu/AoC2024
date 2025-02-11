@@ -1,6 +1,4 @@
 import re
-import graphlib
-
 
 
 
@@ -14,47 +12,34 @@ def good_row(row,rules):
             occured.update(rules[x])
     return True
 
-
-def adj_middle(row,rules):
-    middle = len(row)//2
-    sorted(row,key=rules)
-    while middle in rules.keys():
-        #if rules[]
-        pass
         
 
 #selection sort seems appropriate?
 def sort_row(row,rules):
-    print('Original',row)
-    length = len(row)
-    for i in range(length-1):
-        min_index = i
-        if row[i] in rules.keys():
-            covalues = rules[row[i]]
-            for j in range(i+1,length):
-                    
-                    if row[j] in covalues:
-                        print('new min index is',j)
-                        min_index = j
-                        if min_index in rules.keys():
-                            covalues = rules[row[j]]
-                        else:
-                            break
-
-            #swap
-            if min_index != i:
-                print('did a swap',i,min_index)
-                row[i],row[min_index] = row[min_index],row[i]
-                    
-
+    for i in range(100): #our sort doesnt perfectly sort.. :(.. this gets around it by sorting enough times
+        length = len(row)
+        for i in range(length-1):
+            min_index = i
+            if row[i] in rules.keys():
+                covalues = rules[row[i]]
+                for j in range(i+1,length):             
+                        if row[j] in covalues:
+                            min_index = j
+                            if min_index in rules.keys():
+                                covalues = rules[row[j]]
+                            else:
+                                break
+                #swap
+                if min_index != i:
+                    row[i],row[min_index] = row[min_index],row[i]
     return row
             
 
 
 
-f = open('day5.txt','r')
+f = open('data/day5.txt','r')
 data = f.read().split('\n\n')
-rule_data = re.findall('\d+',data[0])
+rule_data = re.findall('\\d+',data[0])
 len_rules = len(rule_data)
 rules = {}
 #create table mapping each rule (higher to lower)
@@ -68,12 +53,10 @@ for i in range(0,len_rules,2):
 rows = data[1].split()
 row_data = []
 for row in rows:
-    row_data.append(re.findall('\d+',row))
+    row_data.append(re.findall('\\d+',row))
 
 
-#
-print(rules)
-print('')
+
 #find acceptable rows
 acceptable_rows = []
 bad_rows = []
@@ -94,8 +77,7 @@ print('The sum is',value)
 value = 0
 for row in row_data:
     if not row in acceptable_rows:
-        for i in range(100): #our sort doesnt perfectly sort.. :(.. this gets around it by sorting enough times
-            row = sort_row(row,rules)
+        row = sort_row(row,rules)
         mid = len(row)//2
         value += (int)(row[mid])
 

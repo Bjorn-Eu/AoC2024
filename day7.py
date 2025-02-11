@@ -22,7 +22,7 @@ def is_valid(total,arr):
 
 
 
-f = open('day7.txt','r')
+f = open('data/day7.txt','r')
 data = f.read().split()
 array = []
 

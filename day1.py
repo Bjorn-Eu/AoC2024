@@ -21,13 +21,12 @@ def simalarity(a,b):
     for e in b:
         if e in table_a.keys():
             score += e*table_a[e]
-            print('once',score)
 
     return score
 
 
 #read input
-f = open("day1.txt", "r")
+f = open("data/day1.txt", "r")
 a = []
 b = []
 for d in f:

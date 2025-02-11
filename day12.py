@@ -6,9 +6,7 @@ def bfs(index_x,index_y,data):
     columns = len(data[0])
     visited = set()
     char = data[index_x][index_y]
-    
     perimeter = 0
-    
     nodes_to_explore = set()
     nodes_to_explore.add((index_x, index_y))
     visited.update(nodes_to_explore)
@@ -41,7 +39,6 @@ def bfs(index_x,index_y,data):
     return visited, perimeter
 
 
-
 def find_fence_cost(data):
     visited = set()
     rows = len(data)
@@ -54,7 +51,6 @@ def find_fence_cost(data):
                 new_visited, perimeter = bfs(i,j,data)
                 visited.update(new_visited)
                 count += len(new_visited)*perimeter
-
     return count
 
 

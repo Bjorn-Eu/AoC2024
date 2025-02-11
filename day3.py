@@ -1,5 +1,5 @@
 import re
-f = open("day3.txt", "r")
+f = open("data/day3.txt", "r")
 data = f.read()
 
 #part I
@@ -11,7 +11,7 @@ value = 0
 for d in valid_data:
         mul = list(map(int,re.findall('\\d+',d)))
         value += mul[0]*mul[1]
-print(value)
+print('The value is:',value)
 
 
 #part II
@@ -29,4 +29,4 @@ for d in valid_data:
     elif enabled:
         mul = list(map(int,re.findall('\\d+',d)))
         value += mul[0]*mul[1]
-print(value)
+print('The value is:',value)

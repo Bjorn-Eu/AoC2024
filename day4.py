@@ -1,13 +1,11 @@
 
 
 def occurancies_of_XMAS(array):
-    print(array)
     #find each X and count XMAS
     to_find = list('MAS')
     count = 0
     rows = len(array)
     columns = len(array[0])
-    print('ROws',rows,'Columns',columns)
     for i in range(rows):
         for j in range(columns):
             if array[i][j] == 'X': 
@@ -65,7 +63,6 @@ def occurancies_of_X(array):
     count = 0
     rows = len(array)
     columns = len(array[0])
-    print('ROws',rows,'Columns',columns)
     sum = 0
     for i in range(1,rows-1):
         for j in range(1,columns-1):
@@ -80,29 +77,17 @@ def occurancies_of_X(array):
     return sum
 f = open('data/day4.txt','r')
 data = f.read()
-print(data)
 #convert to character grid
 data = data.split('\n')
-#print(data)
 rows = len(data)
 columns = len(data[0])
-#print(data)
-print(rows,columns)
 array = [[0]*columns]*rows
 for i in range(rows):
         array[i] = (list(data[i]))
 
 print('Occurancies of XMAS',occurancies_of_XMAS(array))
-
 print('Occurancies of X-MAS',occurancies_of_X(array))
-#3 right
-#2 left
-#1 down
-#2 up
-#1 dl
-#1 dr
-#4 ur
-#4 ul
+
 
 
 

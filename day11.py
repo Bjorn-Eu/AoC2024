@@ -1,37 +1,8 @@
 
 import cProfile, pstats
 
-def blink(stones):
-    new_stones = set()
-    n_stones = len(stones)
-    for i in range(n_stones)[::-1]: #iterate backwards
-        stone = stones[i]
-        stone_str = (str)(stone)
-        digits = len(stone_str)
-        if stone == 0:
-            stones[i] = 1
-        elif digits%2 == 0:
-                mid = digits//2
-                stone1 = (int)(stone_str[0:mid])
-                stone2 = (int)(stone_str[mid:digits])
-                stones[i] = stone1
-                stones.append(stone2) #stones.insert(i+1,stone2) #calculatioon doesnt care where we insert it..
-        else:
-            stones[i] = stones[i]*2024
 
-def blink_stone(stone):
-    stone_str = (str)(stone)
-    digits = len(stone_str)
-    if stone == 0:
-        return [1]
-    elif digits%2 == 0:
-        mid = digits//2
-        stone1 = (int)(stone_str[0:mid])
-        stone2 = (int)(stone_str[mid:digits])
-        return [stone1, stone2]
-    else:
-        return stone*2024
-
+#create a table of stones
 def tablify(stones,table = {}):
     for stone in stones:
         if stone in table.keys():
@@ -70,22 +41,13 @@ def blink_table(stones):
             else:
                 new_stones[new_stone] = stones[stone]
     return new_stones
-def count_number(stone,n):
-    stones = [stone]
-    for i in range(n):
-        for s in stones:
-            new_stones = blink_stone(stone)
 
-    print(len(stones))
-
-f = open('day11.txt','r')
+f = open('data/day11.txt','r')
 stones = list(map(int,(f.read()).split()))
-
 table = tablify(stones)
-print('old stones:',table)
-for i in range(75):
+iterations = 75 #change this for number of iterations
+for i in range(iterations):
     table = blink_table(table)
-
 
 count = 0
 for stone in table.keys():
@@ -98,5 +60,23 @@ print('total number of stones is',count)
 
 
 
+#naive implementation, not used
+def blink(stones):
+    new_stones = set()
+    n_stones = len(stones)
+    for i in range(n_stones)[::-1]: #backwards
+        stone = stones[i]
+        stone_str = (str)(stone)
+        digits = len(stone_str)
+        if stone == 0:
+            stones[i] = 1
+        elif digits%2 == 0:
+                mid = digits//2
+                stone1 = (int)(stone_str[0:mid])
+                stone2 = (int)(stone_str[mid:digits])
+                stones[i] = stone1
+                stones.append(stone2) #stones.insert(i+1,stone2) #calculatioon doesnt care where we insert it..
+        else:
+            stones[i] = stones[i]*2024
 
 

@@ -70,7 +70,7 @@ def step2(x,y,grid):
     return count
 
 
-f = open('day10.txt','r')
+f = open('data/day10.txt','r')
 data = f.read().split()
 columns = len(data[0])
 rows = len(data)
@@ -81,6 +81,5 @@ for i in range(rows):
 
 
 
-print(search_trails(grid))
-
-print(search_trails2(grid))
+print('Number of hiking trails:',search_trails(grid))
+print('Hiking trail rating sum:', search_trails2(grid))

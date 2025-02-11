@@ -28,6 +28,7 @@ data = list(map(float,re.findall("[-]?\\d+",data)))
 
 length = len(data)
 steps = 100
+#prepare data
 px = []
 py = []
 vx = []
@@ -42,6 +43,7 @@ for i in range(length):
     else:
         vy.append(data[i])
 
+#find positions efter steps iterations
 positions = {}
 for i in range(length//4):
     pos = find_pos(px[i],py[i],vx[i],vy[i],steps)
@@ -50,7 +52,7 @@ for i in range(length//4):
     else:
         positions[pos] = 1
 
-
+#count sum in each quarter
 countQ1=0
 countQ2=0
 countQ3=0
@@ -71,10 +73,12 @@ for pos in positions.keys():
 print("The count is",countQ1*countQ2*countQ3*countQ4)
 
 
-
+#calculate entropi for each configuration
+#conjecture that a picture should have low entropi
 graph = np.zeros((10500))
 for j in range(10500):
-    print("Printing iteration: ",j)
+    if j%1000==0: #give some update to user.
+        print("Iteration: ",j)
     taken = set()
     grid = np.zeros((X_RANGE,Y_RANGE))
     
@@ -83,19 +87,17 @@ for j in range(10500):
         grid[pos[0]][pos[1]]  = 1.0
         taken.add(pos)
 
-    #print(grid)
     grid_l = grid.reshape(-1)
-    #print(sum(grid_l))
     ent = entropi(grid_l)
-    #print(entropi(grid_l))
     graph[j] = ent
 
 
+#plot entropi graph
 plt.plot(np.array(range(10500)),graph)
 plt.show()
 print(np.argmax(graph))
 
-
+#print our found Christmas tree (config with lowest entropi)
 grid = np.zeros((X_RANGE,Y_RANGE))
 for i in range(length//4):
     pos = find_pos(px[i],py[i],vx[i],vy[i],7709)

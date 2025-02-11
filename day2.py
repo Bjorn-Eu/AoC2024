@@ -32,7 +32,7 @@ def is_safe_with_dampen(data):
 
 
 #read input
-f = open("day2.txt", "r")
+f = open("data/day2.txt", "r")
 a = []
 for d in f:
     data = list(map(int,d.split()))
@@ -42,16 +42,15 @@ for d in f:
 #calculate number of safe data
 count = 0
 for d in a:
-    #print(is_safe(d))
     if is_safe(d):
         count += 1
 print(count)
 
+#calculate number of safe data with dampen
 count = 0
 for d in a:
     if is_safe_with_dampen(d):
         count += 1
-
 print(count)
     
 
