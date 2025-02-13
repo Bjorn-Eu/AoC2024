@@ -1,8 +1,6 @@
 import re
 
-
-
-
+#check if a row respect the partial ordering
 def good_row(row,rules):
     occured = set()
     for x in row:
@@ -12,11 +10,31 @@ def good_row(row,rules):
             occured.update(rules[x])
     return True
 
-        
+#create a subdictionary only keeping the order between elements occuring in row
+def create_subdict(row,rules):
+    rules = dict(rules) #copy
+    to_remove = rules.keys()-set(row)
+    to_keep = set(row)
+    for r in to_remove:
+        del rules[r]
+    for key in rules.keys():
+        rules[key] = to_keep.intersection(rules[key])
 
-#selection sort seems appropriate?
+    #finally remove empty keys
+    to_remove = set()
+    for key in rules.keys():
+        if not rules[key]:
+            to_remove.add(key)
+
+    for key in to_remove:
+        del rules[key]
+
+    return rules
+     
+#topological sort, 
+#expect a dictionary rules that only contains order for the elements in row
 def sort_row(row,rules):
-    for i in range(100): #our sort doesnt perfectly sort.. :(.. this gets around it by sorting enough times
+    for i in range(100): #cheatsort for now
         length = len(row)
         for i in range(length-1):
             min_index = i
@@ -33,7 +51,24 @@ def sort_row(row,rules):
                 if min_index != i:
                     row[i],row[min_index] = row[min_index],row[i]
     return row
-            
+
+def top_sort(row,rules):
+    rules = dict(rules) #copy
+    new_row = []
+    unordered = []
+    for r in row:
+        if not (r in rules.keys()): #adds to few
+            unordered.append(r)
+
+    while unordered:
+        node = unordered.pop()
+        new_row.append(node)
+        for key in rules.keys():
+            if node in rules[key]:
+                rules[key].remove(node)
+                if not rules[key]:
+                    unordered.append(key)
+    return new_row
 
 
 
@@ -56,7 +91,6 @@ for row in rows:
     row_data.append(re.findall('\\d+',row))
 
 
-
 #find acceptable rows
 acceptable_rows = []
 bad_rows = []
@@ -66,20 +100,21 @@ for row in row_data:
     else:
         bad_rows.append(row)
 
+#calculate sum of middle elements
 value = 0
 for row in acceptable_rows:
     mid = len(row)//2
     value += (int)(row[mid])
-
 print('The sum is',value)
 
-#print('row_data',row_data[3])
+
+#calculate sum of middle after sorting
 value = 0
-for row in row_data:
-    if not row in acceptable_rows:
-        row = sort_row(row,rules)
-        mid = len(row)//2
-        value += (int)(row[mid])
+for row in bad_rows:
+    sub_rules = create_subdict(row,rules)
+    new_row = top_sort(row,sub_rules)
+    mid = len(new_row)//2
+    value += (int)(new_row[mid])
 
 
 print('The adjusted sum is',value)

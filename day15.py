@@ -107,9 +107,6 @@ def move(grid,action):
 
     print(index)
 
-def push_it():
-    pass
-
 
 f = open('data/day15.txt')
 data = f.read().split("\n\n")
@@ -117,24 +114,16 @@ instructions = data[1].replace('\n','')
 data = data[0].split("\n")
 width = len(data[0])
 grid = [list(data[i]) for i in range(width)]
-
-
-
 grid_width = len(grid[0])
 grid_height = len(grid)
 
 pushit = PushIt(grid)
 
+#simulate
 for instruction in instructions:
     pushit.move(instruction)
-    #print('Move:',instruction)
-    #print("Y: ",pushit.position_y," X: ",pushit.position_x)
-    #pushit.print_grid()
-    
 
 print('The box sum is:',pushit.box_sum())
-#print("Y: ",pushit.position_y," X: ",pushit.position_x)
-#pushit.print_grid()
 
 
 

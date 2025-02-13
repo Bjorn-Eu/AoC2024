@@ -1,6 +1,5 @@
 
 import re
-import time
 
 class Register:
     def __init__(self,a,b,c):
@@ -18,15 +17,12 @@ class Register:
         else:
             return operand
 
-    #done
     def adv(self,operand):
         self.a = (self.a)//(2**self.combo_map(operand))
 
-    #done
     def bxl(self,operand):
         self.b = self.b^operand
 
-    #done
     def bst(self,operand):
         self.b = self.combo_map(operand)%8
         
@@ -59,7 +55,8 @@ c = values[2]
 instructions = values[3::]
 reg =Register(a,b,c)
 
-start = time.time()
+
+print('Running program, the output is:')
 length = len(instructions)
 pointer = 0
 while pointer<length:
