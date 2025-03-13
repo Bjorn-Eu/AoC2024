@@ -40,8 +40,6 @@ def find_path(x,y,grid):
         down = (y==(rows-1) and direction =='down')
         if left or right or up or down:
             break
-
-
     return visited
 
 def is_loop(x,y,grid):

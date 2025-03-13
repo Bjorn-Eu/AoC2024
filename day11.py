@@ -1,7 +1,3 @@
-
-import cProfile, pstats
-
-
 #create a table of stones
 def tablify(stones,table = {}):
     for stone in stones:
