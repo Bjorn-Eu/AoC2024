@@ -82,6 +82,14 @@ while pointer<length:
         reg.cdv(operand)
 
     pointer +=2
+    #reg.print_registry()
 
-
+#target = '0,3,5,4,3,0'
 #target = '2,4,1,3,7,5,0,3,4,1,1,5,5,5,3,0,'
+k=117440
+print('Testing stuff')
+reg = Register(k,0,0)
+reg.adv(3)
+reg.out(4)
+reg.out(4)
+reg.print_registry()

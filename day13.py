@@ -23,7 +23,7 @@ def find_cost2(A,B,target):
     n = np.round(out[0],decimals=3)
     m = np.round(out[1],decimals=3)
     #we adjust for rounding errors to check if integer solution
-    #a more accurate solution would to round and then check if it is a solution..
+    #a more accurate solution would round and then check if it is a solution..
     if np.mod(n,1)==0 and np.mod(m,1)==0:
         if n>=0 and m>=0:
             return 3*n+m
